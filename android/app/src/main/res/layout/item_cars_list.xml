@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:background="@drawable/layout_border"
+              android:layout_height="wrap_content"
+              android:paddingBottom="@dimen/marginBig"
+              android:orientation="vertical">
+
+    <TextView
+            android:id="@+id/markAndModel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginSmall"
+            android:layout_marginTop="@dimen/marginSmall"
+            android:layout_marginEnd="@dimen/marginSmall"
+            android:textColor="@color/blackText"
+            android:textSize="@dimen/textSizeBig"
+            tools:text="Марка и модель"/>
+
+    <TextView
+            android:id="@+id/price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginSmall"
+            android:layout_marginTop="@dimen/marginSmall"
+            android:layout_marginEnd="@dimen/marginSmall"
+            android:layout_marginBottom="@dimen/marginSmall"
+            android:maxLines="1"
+            android:textSize="@dimen/textSizeBig"
+            tools:text="Цена"/>
+
+    <TextView
+            android:id="@+id/color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginSmall"
+            android:layout_marginTop="@dimen/marginSmall"
+            android:layout_marginEnd="@dimen/marginSmall"
+            android:layout_marginBottom="@dimen/marginSmall"
+            android:maxLines="1"
+            android:textSize="@dimen/textSizeBig"
+            tools:text="Цвет"/>
+
+    <TextView
+            android:id="@+id/bodyType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginSmall"
+            android:layout_marginTop="@dimen/marginSmall"
+            android:layout_marginEnd="@dimen/marginSmall"
+            android:layout_marginBottom="@dimen/marginSmall"
+            android:maxLines="1"
+            android:textSize="@dimen/textSizeBig"
+            tools:text="Тип кузова"/>
+
+    <TextView
+            android:id="@+id/year"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginSmall"
+            android:layout_marginTop="@dimen/marginSmall"
+            android:layout_marginEnd="@dimen/marginSmall"
+            android:layout_marginBottom="@dimen/marginSmall"
+            android:maxLines="1"
+            android:textSize="@dimen/textSizeBig"
+            tools:text="Год "/>
+
+    <TextView
+            android:id="@+id/mileage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginSmall"
+            android:layout_marginTop="@dimen/marginSmall"
+            android:layout_marginEnd="@dimen/marginSmall"
+            android:layout_marginBottom="@dimen/marginSmall"
+            android:maxLines="1"
+            android:textSize="@dimen/textSizeBig"
+            tools:text="Пробег"/>
+
+    <TextView
+            android:id="@+id/driveUnit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginSmall"
+            android:layout_marginTop="@dimen/marginSmall"
+            android:layout_marginEnd="@dimen/marginSmall"
+            android:layout_marginBottom="@dimen/marginSmall"
+            android:maxLines="1"
+            android:textSize="@dimen/textSizeBig"
+            tools:text="Привод"/>
+
+    <TextView
+            android:id="@+id/city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginSmall"
+            android:layout_marginTop="@dimen/marginSmall"
+            android:layout_marginEnd="@dimen/marginSmall"
+            android:layout_marginBottom="@dimen/marginSmall"
+            android:maxLines="1"
+            android:textSize="@dimen/textSizeBig"
+            tools:text="Город"/>
+
+    <TextView
+            android:id="@+id/warning1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginSmall"
+            android:layout_marginTop="@dimen/marginSmall"
+            android:layout_marginEnd="@dimen/marginSmall"
+            android:layout_marginBottom="@dimen/marginSmall"
+            android:maxLines="1"
+            android:textSize="@dimen/textSizeBig"
+            android:textColor="@color/red"
+            android:visibility="gone"
+            tools:visibility="visible"
+            tools:text="Варнинг номер 1"/>
+
+    <TextView
+            android:id="@+id/warning2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginSmall"
+            android:layout_marginTop="@dimen/marginSmall"
+            android:layout_marginEnd="@dimen/marginSmall"
+            android:layout_marginBottom="@dimen/marginSmall"
+            android:maxLines="1"
+            android:textColor="@color/red"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:textSize="@dimen/textSizeBig"
+            tools:text="Варнинг номер 2"/>
+
+    <ImageView
+            android:id="@+id/image"
+            android:backgroundTint="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:background="@color/colorPrimary"
+            android:contentDescription="@string/stub"
+            tools:targetApi="lollipop"/>
+
+    <TextView
+            android:id="@+id/comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginSmall"
+            android:layout_marginTop="@dimen/marginSmall"
+            android:layout_marginEnd="@dimen/marginSmall"
+            android:layout_marginBottom="@dimen/marginSmall"
+            android:maxLines="5"
+            android:textSize="@dimen/textSizeBig"
+            tools:text="Комментарий"/>
+
+    <TextView
+            android:id="@+id/chooseButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|start"
+            android:paddingStart="@dimen/marginSmall"
+            android:paddingTop="@dimen/marginBig"
+            android:paddingEnd="@dimen/marginSmall"
+            android:paddingBottom="@dimen/marginBig"
+            android:text="@string/goToOriginal"
+            android:textColor="@color/blueTextColor"
+            android:textSize="@dimen/textSizeBig"
+            android:textStyle="bold"/>
+</LinearLayout>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <TextView
+            android:text="@string/minYearHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/marginBig"
+            android:layout_marginStart="@dimen/marginBig"
+            app:layout_constraintEnd_toStartOf="@id/minYearEdit"
+            android:id="@+id/minYearHint"/>
+
+    <EditText
+            android:id="@+id/minYearEdit"
+            app:layout_constraintTop_toTopOf="@id/minYearHint"
+            app:layout_constraintStart_toEndOf="@id/minYearHint"
+            app:layout_constraintBottom_toBottomOf="@id/minYearHint"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:maxLength="7"
+            app:layout_constraintEnd_toStartOf="@id/maxYearHint"
+            tools:ignore="Autofill,LabelFor"/>
+
+    <TextView
+            android:text="@string/until"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/minYearHint"
+            app:layout_constraintStart_toEndOf="@id/minYearEdit"
+            app:layout_constraintBottom_toBottomOf="@id/minYearHint"
+            app:layout_constraintEnd_toStartOf="@id/maxYearEdit"
+            android:id="@+id/maxYearHint"/>
+
+    <EditText
+            android:id="@+id/maxYearEdit"
+            app:layout_constraintTop_toTopOf="@id/minYearHint"
+            app:layout_constraintStart_toEndOf="@id/maxYearHint"
+            app:layout_constraintBottom_toBottomOf="@id/minYearHint"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:maxLength="7"
+            android:layout_marginEnd="@dimen/marginBig"
+            tools:ignore="Autofill,LabelFor"/>
+
+
+    <TextView
+            android:text="@string/minPriceHint"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            app:layout_constraintTop_toBottomOf="@id/minYearHint"
+            app:layout_constraintStart_toStartOf="@id/minYearHint"
+            app:layout_constraintEnd_toEndOf="@id/minYearHint"
+            android:layout_marginTop="@dimen/marginExtraLarge"
+            android:id="@+id/minPriceHint"/>
+
+    <EditText
+            android:id="@+id/minPriceEdit"
+            app:layout_constraintTop_toTopOf="@id/minPriceHint"
+            app:layout_constraintStart_toStartOf="@id/minYearEdit"
+            app:layout_constraintBottom_toBottomOf="@id/minPriceHint"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:maxLength="7"
+            app:layout_constraintEnd_toEndOf="@id/minYearEdit"
+            tools:ignore="Autofill,LabelFor"/>
+
+    <TextView
+            android:text="@string/until"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/minPriceHint"
+            app:layout_constraintStart_toStartOf="@id/maxYearHint"
+            app:layout_constraintBottom_toBottomOf="@id/minPriceHint"
+            app:layout_constraintEnd_toEndOf="@id/maxYearHint"
+            android:id="@+id/maxPriceHint"/>
+
+    <EditText
+            android:id="@+id/maxPriceEdit"
+            app:layout_constraintTop_toTopOf="@id/minPriceHint"
+            app:layout_constraintStart_toStartOf="@id/maxYearEdit"
+            app:layout_constraintBottom_toBottomOf="@id/minPriceHint"
+            app:layout_constraintEnd_toEndOf="@id/maxYearEdit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:maxLength="7"
+            tools:ignore="Autofill,LabelFor"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
