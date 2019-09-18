@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AvitoCopy</string>
+    <string name="app_name">HandShakes</string>
     <string name="stub">TODO</string>
     <string name="errorHappened">Случилась ошибка!</string>
 
@@ -31,5 +31,10 @@
     <string name="filterResellersHin">Фильтровать перекупов?</string>
     <string name="markHint">Марка</string>
     <string name="modelHint">Модель</string>
+
+    <!--Token-->
+    <string name="setNewTokenHint">Введите токен в поле нижу и нажмите сохранить</string>
+    <string name="token">Токен</string>
+    <string name="save">Сохранить</string>
 
 </resources>

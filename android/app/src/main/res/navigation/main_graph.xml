@@ -13,8 +13,8 @@
 
     <fragment
             android:id="@+id/filtersFragment"
-            android:name="ru.lingstra.avitocopy.ui.filters.FiltersFragment"
+            android:name="ru.lingstra.avitocopy.ui.token.TokenFragment"
             android:label="FiltersFragment"
-            tools:layout="@layout/fragment_filters"/>
+            tools:layout="@layout/fragment_token"/>
 
 </navigation>

@@ -8,5 +8,5 @@
     <item android:id="@+id/filtersFragment"
           android:icon="@drawable/icon_filter"
           android:enabled="true"
-          android:title="Фильтры"/>
+          android:title="@string/token"/>
 </menu>

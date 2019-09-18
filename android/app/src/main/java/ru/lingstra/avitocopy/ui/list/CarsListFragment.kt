@@ -29,7 +29,7 @@ class CarsListFragment : MviBaseFragment<CarsListView, CarsListPresenter>(), Car
         return scope.getInstance(CarsListPresenter::class.java)
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         adapter = CarsListRecyclerAdapter(arrayListOf())
     }
@@ -53,7 +53,7 @@ class CarsListFragment : MviBaseFragment<CarsListView, CarsListPresenter>(), Car
 
     override fun onResume() {
         super.onResume()
-        loadingIntent.accept(Unit)
+        //loadingIntent.accept(Unit)
     }
 
     private fun setupRecycler() {
