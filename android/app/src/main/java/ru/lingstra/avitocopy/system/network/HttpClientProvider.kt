@@ -14,8 +14,8 @@ class HttpClientProvider @Inject constructor(
 ) : Provider<OkHttpClient> {
 
     companion object {
-        private const val CONNECT_TIMEOUT = 100 * 1000L
-        private const val READ_TIMEOUT = 100 * 1000L
+        private const val CONNECT_TIMEOUT = 30 * 1000L
+        private const val READ_TIMEOUT = 30 * 1000L
     }
 
     override fun get(): OkHttpClient = with(OkHttpClient.Builder()) {

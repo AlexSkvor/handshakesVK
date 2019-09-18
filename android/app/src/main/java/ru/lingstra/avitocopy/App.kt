@@ -25,7 +25,7 @@ class App : Application() {
 
     private fun openScope() {
         val appScope = Toothpick.openScope(DI.APP_SCOPE)
-        appScope.installModules(AppModule(this, "http://84.201.139.189:8080/devapi-2/"))
+        appScope.installModules(AppModule(this, "https://api.vk.com/method/"))
     }
 
     private fun initTimber() {

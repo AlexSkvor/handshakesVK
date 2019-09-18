@@ -54,7 +54,6 @@ class AppActivity : MviActivity<AppView, AppPresenter>(), AppView {
     }
 
     private fun showProgress(visible: Boolean) {
-        visible.alsoPrintDebug("AAAAAAAAAAAAAA")
         val fragment = supportFragmentManager.findFragmentByTag(DIALOG_TAG)
         if (fragment != null && !visible) {
             (fragment as ProgressDialogFragment).dismissAllowingStateLoss()

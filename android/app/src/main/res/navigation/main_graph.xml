@@ -7,9 +7,9 @@
 
     <fragment
             android:id="@+id/carsListFragment"
-            android:name="ru.lingstra.avitocopy.ui.list.CarsListFragment"
+            android:name="ru.lingstra.avitocopy.ui.list.HandShakesFragment"
             android:label="CarsListFragment"
-            tools:layout="@layout/fragment_cars_list"/>
+            tools:layout="@layout/fragment_hand_shakes"/>
 
     <fragment
             android:id="@+id/filtersFragment"
