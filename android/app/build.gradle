@@ -29,10 +29,11 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutAndroidX"
     implementation "com.google.android.material:material:$materialAndroidX"
     implementation "androidx.cardview:cardview:$cardviewAndroidX"
+    implementation 'androidx.core:core-ktx:1.1.0'
     // navigation component
-    implementation "android.arch.navigation:navigation-fragment:$navigationComponent"
-    implementation "android.arch.navigation:navigation-ui:$navigationComponent"
-    implementation 'android.arch.navigation:navigation-ui-ktx:1.0.0'
+    implementation 'androidx.navigation:navigation-fragment:2.2.0-alpha03'
+    implementation 'androidx.navigation:navigation-ui:2.2.0-alpha03'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.2.0-alpha03'
     //    RxJava2
     implementation "io.reactivex.rxjava2:rxjava:$rxjavaVersion"
     implementation "com.jakewharton.rxrelay2:rxrelay:$rxrelayVersion"
