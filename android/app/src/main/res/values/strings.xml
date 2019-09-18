@@ -33,7 +33,7 @@
     <string name="modelHint">Модель</string>
 
     <!--Token-->
-    <string name="setNewTokenHint">Введите токен в поле нижу и нажмите сохранить</string>
+    <string name="setNewTokenHint">Введите токен в поле ниже и нажмите сохранить</string>
     <string name="token">Токен</string>
     <string name="save">Сохранить</string>
 
