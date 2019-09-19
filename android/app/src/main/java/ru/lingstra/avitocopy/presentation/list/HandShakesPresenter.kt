@@ -49,10 +49,11 @@ class HandShakesPresenter @Inject constructor(
     }
 
     private fun getActions(): Observable<HandShakesPartialState> {
-        val firstLoad = intent(HandShakesView::initialLoad)
-            .switchMap { interactor.load() }
 
-        val actionsList = listOf(firstLoad)
+        val searchIntent = intent(HandShakesView::startSearch)
+            .switchMap { interactor.load(it) }
+
+        val actionsList = listOf(searchIntent)
 
         return Observable.merge(actionsList)
     }

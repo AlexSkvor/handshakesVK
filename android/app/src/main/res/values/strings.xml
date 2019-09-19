@@ -3,38 +3,14 @@
     <string name="stub">TODO</string>
     <string name="errorHappened">Случилась ошибка!</string>
 
-    <!--List-->
-    <string name="markAndModelCar">Автомобиль %s %s</string>
-    <string name="priceCar">По цене: %d рублей</string>
-    <string name="colorCar">Цвет: %s</string>
-    <string name="bodyTypeCar">Тип кузова: %s</string>
-    <string name="yearCar">Год производства: %d</string>
-    <string name="mileageCar">Пробег: %d (за год: %d)</string>
-    <string name="driveUnitCar">Привод: %s</string>
-    <string name="cityCar">Город: %s</string>
-    <string name="commentCar">Комментарий продавца: %s</string>
-    <string name="warningPrice">Средняя цена на модель: %d</string>
-    <string name="warningMileage">Пробег превышает 20 000 за год!</string>
-    <string name="goToOriginal">Перейти к оригиналу</string>
-    <string name="carsNotFound">Не найдено ни одной машины по Вашему запросу!</string>
-    <string name="getMore">Загрузить еще</string>
-
-    <!--Filters-->
-    <string name="minPriceHint">Цена от:</string>
-    <string name="until"> до:</string>
-    <string name="minYearHint">Год выпуска от:</string>
-    <string name="bodyTypeHint">Тип кузова:</string>
-    <string name="takeHint">Загружать по:</string>
-    <string name="citiesHint">Город продажи:</string>
-    <string name="colorsHint">Цвет:</string>
-    <string name="sourcesHint">Источник:</string>
-    <string name="filterResellersHin">Фильтровать перекупов?</string>
-    <string name="markHint">Марка</string>
-    <string name="modelHint">Модель</string>
-
     <!--Token-->
     <string name="setNewTokenHint">Введите токен в поле ниже и нажмите сохранить</string>
     <string name="token">Токен</string>
     <string name="save">Сохранить</string>
+
+    <!--Search HandShakes-->
+    <string name="firstRefHint">Первая ссылка на страницу</string>
+    <string name="secondRefHint">Вторая ссылка на страницу</string>
+    <string name="start">Начать</string>
 
 </resources>

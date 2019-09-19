@@ -11,7 +11,7 @@ class HandShakesRepository @Inject constructor(
     private val scheduler: SchedulersProvider,
     private val prefs: AppPrefs
 ) {
-    fun searchHandShakes(): Observable<List<Int>> =
+    fun searchHandShakes(firstUrl: String, secondUrl: String): Observable<List<Int>> =
         api.getFriendsForUser(userId = 150973989, token = prefs.token)
             .map { it.response.items }
             .toObservable()

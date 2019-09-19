@@ -1,10 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+    <TextView
+            android:id="@+id/firstRefHint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginBig"
+            android:layout_marginTop="@dimen/bigPadding"
+            android:layout_marginEnd="@dimen/marginBig"
+            android:gravity="center"
+            android:text="@string/firstRefHint"
+            android:textSize="@dimen/textSizeBig" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <EditText
+            android:id="@+id/firstRefEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginBig"
+            android:layout_marginTop="@dimen/marginBig"
+            android:layout_marginEnd="@dimen/marginBig"
+            android:importantForAutofill="no"
+            android:inputType="textUri"
+            android:lines="1"
+            android:maxLength="999"
+            android:maxLines="1"
+            tools:ignore="LabelFor" />
+
+    <TextView
+            android:id="@+id/secondRefHint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginBig"
+            android:layout_marginTop="@dimen/marginBig"
+            android:layout_marginEnd="@dimen/marginBig"
+            android:gravity="center"
+            android:text="@string/secondRefHint"
+            android:textSize="@dimen/textSizeBig" />
+
+    <EditText
+            android:id="@+id/secondRefEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginBig"
+            android:layout_marginTop="@dimen/marginBig"
+            android:layout_marginEnd="@dimen/marginBig"
+            android:importantForAutofill="no"
+            android:inputType="textUri"
+            android:lines="1"
+            android:maxLength="999"
+            android:maxLines="1"
+            tools:ignore="LabelFor" />
+
+    <Button
+            android:id="@+id/start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/marginBig"
+            android:text="@string/start" />
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/answerRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/item_answer" />
+
+</LinearLayout>

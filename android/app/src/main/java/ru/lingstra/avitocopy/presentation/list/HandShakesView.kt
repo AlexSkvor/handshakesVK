@@ -5,7 +5,7 @@ import io.reactivex.Observable
 import ru.lingstra.avitocopy.domain.hand_shakes.HandShakesViewState
 
 interface HandShakesView: MvpView {
-    fun initialLoad(): Observable<Unit> = Observable.just(Unit)
+    fun startSearch(): Observable<Pair<String, String>>
 
     fun render(state: HandShakesViewState)
 }

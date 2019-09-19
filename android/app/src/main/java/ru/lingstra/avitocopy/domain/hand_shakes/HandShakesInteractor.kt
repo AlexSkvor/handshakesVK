@@ -9,8 +9,8 @@ class HandShakesInteractor @Inject constructor(
     private val repository: HandShakesRepository
 ) {
 
-    fun load(): Observable<HandShakesPartialState> =
-        repository.searchHandShakes()
+    fun load(input: Pair<String, String>): Observable<HandShakesPartialState> =
+        repository.searchHandShakes(input.first, input.second)
             .map { HandShakesPartialState.Answer(it).partial() }
             .startWith(HandShakesPartialState.Loading(true))
             .onErrorReturn { HandShakesPartialState.Error(it) }
