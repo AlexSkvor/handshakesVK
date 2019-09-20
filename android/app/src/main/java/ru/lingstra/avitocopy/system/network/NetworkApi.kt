@@ -20,6 +20,7 @@ interface NetworkApi {
     fun getVkId(
         @Query("user_ids") userId: String,
         @Query("access_token") token: String,
+        @Query("fields") fields: String = "photo_50",
         @Query("v") version: String = "5.101"
     ): Single<IdFromRefServerResponse>
 }

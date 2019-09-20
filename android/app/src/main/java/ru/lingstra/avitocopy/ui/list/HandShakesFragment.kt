@@ -9,6 +9,7 @@ import io.reactivex.Observable
 import kotlinx.android.synthetic.main.fragment_hand_shakes.*
 import ru.lingstra.avitocopy.R
 import ru.lingstra.avitocopy.domain.hand_shakes.HandShakesViewState
+import ru.lingstra.avitocopy.domain.hand_shakes.User
 import ru.lingstra.avitocopy.presentation.list.HandShakesPresenter
 import ru.lingstra.avitocopy.presentation.list.HandShakesView
 import ru.lingstra.avitocopy.ui.base.MviBaseFragment
@@ -22,7 +23,7 @@ class HandShakesFragment : MviBaseFragment<HandShakesView, HandShakesPresenter>(
     override fun createPresenter(): HandShakesPresenter =
         scope.getInstance(HandShakesPresenter::class.java)
 
-    private lateinit var adapter: CompositeDelegateAdapter<Int>
+    private lateinit var adapter: CompositeDelegateAdapter<User>
 
     override fun render(state: HandShakesViewState) {
         adapter.replaceData(state.answerList)
@@ -34,8 +35,8 @@ class HandShakesFragment : MviBaseFragment<HandShakesView, HandShakesPresenter>(
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        adapter = CompositeDelegateAdapter.Companion.Builder<Int>()
-            .add(IntAnswerAdapter())
+        adapter = CompositeDelegateAdapter.Companion.Builder<User>()
+            .add(UserListAdapter())
             .build()
     }
 
