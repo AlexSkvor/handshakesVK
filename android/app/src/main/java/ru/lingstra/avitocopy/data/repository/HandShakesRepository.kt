@@ -47,10 +47,10 @@ class HandShakesRepository @Inject constructor(
         val backwardSet = mutableSetOf(secondUser)
         var i = 0
         while (i < length) {
-            forwardSet.intersect(backwardSet).firstOrNull()?.let { common ->
+            forwardSet.map { it.id }.intersect(backwardSet.map { it.id }).firstOrNull()?.let { id ->
                 return buildPath(
-                    forwardSet.first { it.id == common.id },
-                    backwardSet.first { it.id == common.id })
+                    forwardSet.first { it.id == id },
+                    backwardSet.first { it.id == id })
             }
             val nextForward: SimplestUser? = forwardSet.firstOrNull { !it.checked && it.level == i }
             nextForward?.let {
@@ -69,11 +69,10 @@ class HandShakesRepository @Inject constructor(
                 forwardSet.add(it.copy(checked = true))
             }
 
-
-            forwardSet.intersect(backwardSet).firstOrNull()?.let { common ->
+            forwardSet.map { it.id }.intersect(backwardSet.map { it.id }).firstOrNull()?.let { id ->
                 return buildPath(
-                    forwardSet.first { it.id == common.id },
-                    backwardSet.first { it.id == common.id })
+                    forwardSet.first { it.id == id },
+                    backwardSet.first { it.id == id })
             }
             val nextBackward: SimplestUser? =
                 backwardSet.firstOrNull { !it.checked && it.level == i }
