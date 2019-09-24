@@ -2,8 +2,6 @@ package ru.lingstra.avitocopy
 
 import org.junit.Test
 
-import org.junit.Assert.*
-
 /**
  * Example local unit test, which will execute on the development machine (host).
  *
@@ -12,6 +10,20 @@ import org.junit.Assert.*
 class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+        val f = setOf(TT(0, "0"), TT(1, "1"))
+        val s = setOf(TT(1, "111"), TT(2, "2"))
+        val t: MutableSet<TT> = s.toMutableSet()
+        t.addAll(f)
+        println(t)
+    }
+
+    data class TT(val int: Int, val str: String) {
+        override fun equals(other: Any?): Boolean {
+            return int == (other as? TT)?.int
+        }
+
+        override fun hashCode(): Int {
+            return int
+        }
     }
 }

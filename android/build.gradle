@@ -2,7 +2,7 @@
 
 buildscript {
     //kotlin lib
-    ext.kotlinVersion = '1.3.40'
+    ext.kotlinVersion = '1.3.50'
     ext.ankoVersion = '0.10.7'
     ext.ktlintVersion = '0.23.1'
     //androidx
@@ -23,10 +23,10 @@ buildscript {
     //navigation lib
     ext.navigationComponent = '1.0.0'
     //animation
-    ext.transitionseverywhere = '2.0.0-beta01'
+    ext.transitionseverywhere = '2.1.0-beta01'
     //view lib
     ext.rivVersion = '2.3.0'
-    ext.adapterDelegatesVersion = '3.0.1'
+    ext.adapterDelegatesVersion = '3.1.0'
     ext.scrollingPagerIndicator = '1.0.5'
     // di lib
     ext.toothpickVersion = '2.1.0'
@@ -34,6 +34,13 @@ buildscript {
     ext.threetenABPVersion = '1.1.0'
     // log lib
     ext.timberVersion = '4.7.1'
+
+    //test lib version
+    ext.junitVersion = '4.12'
+    ext.testRunner = '1.2.0'
+    ext.espresso = '3.2.0'
+    ext.mockitoVersion = '2.27.0'
+    ext.mockitoKotlinVersion = '1.4.0'
 
     repositories {
         google()
