@@ -8,12 +8,16 @@ import com.jakewharton.rxbinding2.view.clicks
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.fragment_hand_shakes.*
 import ru.lingstra.avitocopy.R
+import ru.lingstra.avitocopy.data.repository.NetworkProvider
+import ru.lingstra.avitocopy.data.repository.NetworkSimple
 import ru.lingstra.avitocopy.domain.hand_shakes.HandShakesViewState
 import ru.lingstra.avitocopy.domain.hand_shakes.User
 import ru.lingstra.avitocopy.presentation.list.HandShakesPresenter
 import ru.lingstra.avitocopy.presentation.list.HandShakesView
 import ru.lingstra.avitocopy.ui.base.MviBaseFragment
 import ru.lingstra.avitocopy.ui.utils.delegate.CompositeDelegateAdapter
+import toothpick.Scope
+import toothpick.config.Module
 
 class HandShakesFragment : MviBaseFragment<HandShakesView, HandShakesPresenter>(), HandShakesView {
 
@@ -24,6 +28,14 @@ class HandShakesFragment : MviBaseFragment<HandShakesView, HandShakesPresenter>(
         scope.getInstance(HandShakesPresenter::class.java)
 
     private lateinit var adapter: CompositeDelegateAdapter<User>
+
+    override fun installModules(scope: Scope) {
+        scope.installModules(object : Module() {
+            init {
+                bind(NetworkProvider::class.java).to(NetworkSimple::class.java).singletonInScope()
+            }
+        })
+    }
 
     override fun render(state: HandShakesViewState) {
         adapter.replaceData(state.answerList)

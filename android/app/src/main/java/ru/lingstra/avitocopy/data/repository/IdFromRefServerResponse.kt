@@ -1,13 +1,7 @@
 package ru.lingstra.avitocopy.data.repository
 
-data class IdFromRefServerResponse(
-    val response: List<Response>
-)
+import ru.lingstra.avitocopy.domain.hand_shakes.FriendItem
 
-data class Response(
-    val id: Int,
-    val is_closed: Boolean,
-    val first_name: String,
-    val last_name: String,
-    val photo_50: String
+data class IdFromRefServerResponse(
+    val response: List<FriendItem>
 )
