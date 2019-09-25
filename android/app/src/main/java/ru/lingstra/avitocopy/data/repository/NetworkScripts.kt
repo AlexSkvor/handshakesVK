@@ -2,11 +2,13 @@ package ru.lingstra.avitocopy.data.repository
 
 import ru.lingstra.avitocopy.data.prefs.AppPrefs
 import ru.lingstra.avitocopy.system.network.NetworkApi
+import timber.log.Timber
 import javax.inject.Inject
 
 class NetworkScripts @Inject constructor(
     private val api: NetworkApi,
-    private val prefs: AppPrefs
+    private val prefs: AppPrefs,
+    private val scriptGenerator: ScriptGeneratorFriends
 ) : NetworkProvider {
 
     override fun loadMore(set: MutableSet<SimplestUser>, level: Int): Boolean {
@@ -20,11 +22,32 @@ class NetworkScripts @Inject constructor(
         return queryList.isEmpty()
     }
 
-    override fun getFriendItemsFromUrls(urls: Pair<String, String>): Pair<SimplestUser, SimplestUser> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getFriendItemsFromUrls(urls: Pair<String, String>): Pair<SimplestUser, SimplestUser> =
+        getFriendItemFromUrl(urls.first) to getFriendItemFromUrl(urls.second)
+
+    private fun getFriendItemFromUrl(path: String): SimplestUser =
+        api.userInfo(userId = path.substringAfter("https://vk.com/"), token = prefs.token)
+            .map { it.response.first() }
+            .map { SimplestUser(it) }
+            .blockingGet()
 
     private fun getFriendsList(users: List<SimplestUser>): Set<SimplestUser> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val script = scriptGenerator.generateForList(users)
+        return try {
+            api.executeScript(script, token = prefs.token)
+                .blockingGet()
+                .response.map {
+                it.friends.items.map { friend ->
+                    SimplestUser(
+                        item = friend,
+                        parent = users.first { user -> user.item.id == it.parent },
+                        level = users.first().level + 1
+                    )
+                }
+            }.flatten().toSet()
+        } catch (t: Throwable) {
+            Timber.e(t)
+            setOf()
+        }
     }
 }
