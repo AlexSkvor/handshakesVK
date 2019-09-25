@@ -15,4 +15,7 @@ class HandShakesInteractor @Inject constructor(
             .startWith(HandShakesPartialState.Loading(true))
             .onErrorReturn { HandShakesPartialState.Error(it) }
             .endWith(HandShakesPartialState.Loading(false))
+
+    fun queries(): Observable<HandShakesPartialState> = repository.queries()
+        .map { HandShakesPartialState.Query.partial() }
 }

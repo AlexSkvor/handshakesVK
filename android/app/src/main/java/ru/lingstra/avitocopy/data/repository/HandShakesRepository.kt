@@ -11,6 +11,8 @@ class HandShakesRepository @Inject constructor(
     private val scheduler: SchedulersProvider
 ) {
 
+    fun queries(): Observable<Unit> = network.queries().observeOn(scheduler.ui())
+
     private val length = 3
 
     fun searchHandShakes(firstUrl: String, secondUrl: String): Observable<List<User>> =

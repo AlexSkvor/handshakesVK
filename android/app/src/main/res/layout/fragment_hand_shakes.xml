@@ -5,12 +5,39 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+    <LinearLayout
+            android:id="@+id/timeQueriesLayout"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/marginBig"
+            android:layout_marginBottom="@dimen/marginBig"
+            android:visibility="invisible"
+            android:layout_height="wrap_content">
+
+        <TextView
+                android:id="@+id/timeField"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:lines="1"
+                android:layout_height="wrap_content"/>
+
+        <TextView
+                android:id="@+id/queriesField"
+                android:layout_width="0dp"
+                android:gravity="center"
+                android:lines="1"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
     <TextView
             android:id="@+id/firstRefHint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginBig"
             android:layout_marginStart="@dimen/marginBig"
-            android:layout_marginTop="@dimen/bigPadding"
             android:layout_marginEnd="@dimen/marginBig"
             android:gravity="center"
             android:text="@string/firstRefHint"

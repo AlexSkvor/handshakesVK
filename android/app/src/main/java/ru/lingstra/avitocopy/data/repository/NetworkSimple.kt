@@ -1,5 +1,6 @@
 package ru.lingstra.avitocopy.data.repository
 
+import io.reactivex.Observable
 import ru.lingstra.avitocopy.data.prefs.AppPrefs
 import ru.lingstra.avitocopy.system.network.NetworkApi
 import timber.log.Timber
@@ -10,6 +11,7 @@ class NetworkSimple @Inject constructor(
     private val api: NetworkApi,
     private val prefs: AppPrefs
 ) : NetworkProvider {
+    override fun queries(): Observable<Unit> = Observable.empty()
 
     override fun loadMore(set: MutableSet<SimplestUser>, level: Int): Boolean =
         set.loadMoreInner(level)

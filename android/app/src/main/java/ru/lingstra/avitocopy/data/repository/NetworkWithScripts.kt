@@ -1,5 +1,7 @@
 package ru.lingstra.avitocopy.data.repository
 
+import com.jakewharton.rxrelay2.PublishRelay
+import io.reactivex.Observable
 import ru.lingstra.avitocopy.data.prefs.AppPrefs
 import ru.lingstra.avitocopy.system.network.NetworkApi
 import ru.lingstra.avitocopy.system.network.QueriesTimeController
@@ -12,6 +14,9 @@ class NetworkWithScripts @Inject constructor(
     private val scriptGenerator: ScriptGeneratorFriends,
     private val timeController: QueriesTimeController
 ) : NetworkProvider {
+
+    private val queriesRelay: PublishRelay<Unit> = PublishRelay.create()
+    override fun queries(): Observable<Unit> = queriesRelay.hide()
 
     override fun loadMore(set: MutableSet<SimplestUser>, level: Int): Boolean {
         val queryList = set.asSequence().filter { it.level == level && it.shouldCheck }
@@ -29,7 +34,9 @@ class NetworkWithScripts @Inject constructor(
         getFriendItemFromUrl(urls.first) to getFriendItemFromUrl(urls.second)
 
     private fun getFriendItemFromUrl(path: String): SimplestUser {
-        return timeController.nextQuery().andThen(api.userInfo(
+        return timeController.nextQuery()
+            .also { queriesRelay.accept(Unit) }
+            .andThen(api.userInfo(
             userId = path.substringAfter("https://vk.com/"),
             token = prefs.token
         )
@@ -41,10 +48,10 @@ class NetworkWithScripts @Inject constructor(
     private fun getFriendsList(users: List<SimplestUser>): Set<SimplestUser> {
         val script = scriptGenerator.generateForList(users)
         return try {
-            timeController.nextQuery().andThen(
-                api.executeScript(script, token = prefs.token)
-
-            ).blockingGet()
+            timeController.nextQuery()
+                .also { queriesRelay.accept(Unit) }
+                .andThen(api.executeScript(script, token = prefs.token))
+                .blockingGet()
                 .response.map {
                 it.friends.items.map { friend ->
                     SimplestUser(

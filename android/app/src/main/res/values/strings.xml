@@ -12,5 +12,7 @@
     <string name="firstRefHint">Первая ссылка на страницу</string>
     <string name="secondRefHint">Вторая ссылка на страницу</string>
     <string name="start">Начать</string>
+    <string name="timeSinceStart">Время: %d</string>
+    <string name="queriesSinceStart">Запросы: %d</string>
 
 </resources>

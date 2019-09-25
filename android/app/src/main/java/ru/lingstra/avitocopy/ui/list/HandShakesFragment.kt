@@ -16,6 +16,7 @@ import ru.lingstra.avitocopy.presentation.list.HandShakesPresenter
 import ru.lingstra.avitocopy.presentation.list.HandShakesView
 import ru.lingstra.avitocopy.ui.base.MviBaseFragment
 import ru.lingstra.avitocopy.ui.utils.delegate.CompositeDelegateAdapter
+import ru.lingstra.avitocopy.visible
 import toothpick.Scope
 import toothpick.config.Module
 
@@ -39,6 +40,16 @@ class HandShakesFragment : MviBaseFragment<HandShakesView, HandShakesPresenter>(
 
     override fun render(state: HandShakesViewState) {
         adapter.replaceData(state.answerList)
+        renderTimeAndSearch(state)
+    }
+
+    private fun renderTimeAndSearch(state: HandShakesViewState){
+        timeQueriesLayout.visible = state.loaded || state.loadingInProcess
+        if (state.loaded || state.loadingInProcess){
+            val time = state.endTime - state.startTime
+            timeField.text = getString(R.string.timeSinceStart, time.toInt())
+            queriesField.text = getString(R.string.queriesSinceStart, state.queries)
+        }
     }
 
     override fun startSearch(): Observable<Pair<String, String>> =

@@ -10,6 +10,7 @@ import ru.lingstra.avitocopy.presentation.base.BaseMviPresenter
 import ru.lingstra.avitocopy.system.ResourceManager
 import ru.lingstra.avitocopy.system.SystemMessage
 import timber.log.Timber
+import java.util.*
 import javax.inject.Inject
 
 class HandShakesPresenter @Inject constructor(
@@ -30,7 +31,9 @@ class HandShakesPresenter @Inject constructor(
 
     private val reducer = BiFunction { oldState: HandShakesViewState, it: HandShakesPartialState ->
         when (it) {
-            is HandShakesPartialState.Answer -> oldState.copy(answerList = it.list)
+            is HandShakesPartialState.Answer -> oldState.copy(answerList = it.list, loadingInProcess = false, loaded = true, endTime = Date().time)
+            is HandShakesPartialState.Start -> HandShakesViewState(loadingInProcess = true)
+            is HandShakesPartialState.Query -> oldState.copy(endTime = Date().time, queries = oldState.queries + 1)
             else -> oldState
         }
     }
@@ -50,10 +53,12 @@ class HandShakesPresenter @Inject constructor(
 
     private fun getActions(): Observable<HandShakesPartialState> {
 
-        val searchIntent = intent(HandShakesView::startSearch)
-            .switchMap { interactor.load(it) }
+        val startLoadIntent = intent(HandShakesView::startSearch).share()
 
-        val actionsList = listOf(searchIntent)
+        val markStartTimeIntent = startLoadIntent.map { HandShakesPartialState.Start }
+        val searchIntent = startLoadIntent.switchMap { interactor.load(it) }
+
+        val actionsList = listOf(searchIntent, markStartTimeIntent, interactor.queries())
 
         return Observable.merge(actionsList)
     }
