@@ -34,7 +34,7 @@ class HandShakesFragment : MviBaseFragment<HandShakesView, HandShakesPresenter>(
     override fun installModules(scope: Scope) {
         scope.installModules(object : Module() {
             init {
-                bind(NetworkProvider::class.java).to(NetworkSimple::class.java).singletonInScope()
+                bind(NetworkProvider::class.java).to(NetworkWithScripts::class.java).singletonInScope()
             }
         })
     }
