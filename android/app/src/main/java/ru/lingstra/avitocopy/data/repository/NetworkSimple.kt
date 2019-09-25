@@ -1,5 +1,6 @@
 package ru.lingstra.avitocopy.data.repository
 
+import com.jakewharton.rxrelay2.PublishRelay
 import io.reactivex.Observable
 import ru.lingstra.avitocopy.data.prefs.AppPrefs
 import ru.lingstra.avitocopy.system.network.NetworkApi
@@ -11,7 +12,9 @@ class NetworkSimple @Inject constructor(
     private val api: NetworkApi,
     private val prefs: AppPrefs
 ) : NetworkProvider {
-    override fun queries(): Observable<Unit> = Observable.empty()
+
+    private val queriesRelay: PublishRelay<Unit> = PublishRelay.create()
+    override fun queries(): Observable<Unit> = queriesRelay.hide()
 
     override fun loadMore(set: MutableSet<SimplestUser>, level: Int): Boolean =
         set.loadMoreInner(level)
@@ -19,12 +22,14 @@ class NetworkSimple @Inject constructor(
     override fun getFriendItemsFromUrls(urls: Pair<String, String>): Pair<SimplestUser, SimplestUser> =
         getFriendItemFromUrl(urls.first) to getFriendItemFromUrl(urls.second)
 
-    private fun getFriendItemFromUrl(path: String): SimplestUser =
-        api.userInfo(userId = path.substringAfter("https://vk.com/"), token = prefs.token)
+    private fun getFriendItemFromUrl(path: String): SimplestUser {
+        queriesRelay.accept(Unit)
+        return api.userInfo(userId = path.substringAfter("https://vk.com/"), token = prefs.token)
             .map { it.response.first() }
             .map { SimplestUser(it) }
             .delay(300L, TimeUnit.MILLISECONDS)
             .blockingGet()
+    }
 
     private fun MutableSet<SimplestUser>.loadMoreInner(level: Int): Boolean {
         val next = this.firstOrNull { it.shouldCheck && it.level == level }
@@ -36,8 +41,9 @@ class NetworkSimple @Inject constructor(
         return next == null
     }
 
-    private fun getFriendsList(user: SimplestUser): Set<SimplestUser> =
-        try {
+    private fun getFriendsList(user: SimplestUser): Set<SimplestUser> {
+        queriesRelay.accept(Unit)
+        return try {
             api.friendsList(user.item.id, token = prefs.token)
                 .delay(300L, TimeUnit.MILLISECONDS)
                 .blockingGet()
@@ -48,4 +54,5 @@ class NetworkSimple @Inject constructor(
             Timber.e(t)
             setOf()
         }
+    }
 }
