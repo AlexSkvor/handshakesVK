@@ -26,4 +26,10 @@ class ExampleUnitTest {
             return int
         }
     }
+
+    @Test
+    fun testPrint(){
+        val list = listOf(1, 2, 3)
+        println(list)
+    }
 }

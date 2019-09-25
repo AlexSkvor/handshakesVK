@@ -22,6 +22,7 @@ class HttpClientProvider @Inject constructor(
         connectTimeout(CONNECT_TIMEOUT, TimeUnit.MILLISECONDS)
         readTimeout(READ_TIMEOUT, TimeUnit.MILLISECONDS)
 
+
         addNetworkInterceptor(interceptor)
 
         if (BuildConfig.DEBUG) {

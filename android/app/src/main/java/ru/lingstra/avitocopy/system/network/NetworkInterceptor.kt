@@ -5,9 +5,7 @@ import okhttp3.Response
 import java.io.IOException
 import javax.inject.Inject
 
-class NetworkInterceptor @Inject constructor(
-    private val timeController: QueriesTimeController
-) : Interceptor {
+class NetworkInterceptor @Inject constructor() : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain?): Response {
         chain ?: throw IOException("Failed to interceptor chain")
@@ -17,7 +15,6 @@ class NetworkInterceptor @Inject constructor(
             builder.addHeader("X-Requested-With", "XMLHttpRequest")
         }
 
-        timeController.nextQuery()
         return chain.proceed(builder.build())
     }
 }

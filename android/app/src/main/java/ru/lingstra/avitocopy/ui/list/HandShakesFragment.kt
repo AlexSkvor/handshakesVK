@@ -9,8 +9,7 @@ import io.reactivex.Observable
 import kotlinx.android.synthetic.main.fragment_hand_shakes.*
 import ru.lingstra.avitocopy.R
 import ru.lingstra.avitocopy.data.repository.NetworkProvider
-import ru.lingstra.avitocopy.data.repository.NetworkScripts
-import ru.lingstra.avitocopy.data.repository.NetworkSimple
+import ru.lingstra.avitocopy.data.repository.NetworkWithScripts
 import ru.lingstra.avitocopy.domain.hand_shakes.HandShakesViewState
 import ru.lingstra.avitocopy.domain.hand_shakes.User
 import ru.lingstra.avitocopy.presentation.list.HandShakesPresenter
@@ -33,7 +32,7 @@ class HandShakesFragment : MviBaseFragment<HandShakesView, HandShakesPresenter>(
     override fun installModules(scope: Scope) {
         scope.installModules(object : Module() {
             init {
-                bind(NetworkProvider::class.java).to(NetworkScripts::class.java).singletonInScope()
+                bind(NetworkProvider::class.java).to(NetworkWithScripts::class.java).singletonInScope()
             }
         })
     }
