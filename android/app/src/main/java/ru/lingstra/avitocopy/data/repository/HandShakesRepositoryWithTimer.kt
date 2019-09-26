@@ -79,6 +79,7 @@ class HandShakesRepositoryWithTimer @Inject constructor(
             .observeOn(scheduler.ui())
             .doOnNext { loadingsNumber-- }
             .filter { it.isNotEmpty() }
+            .first(listOf()).toObservable()
 
     private fun Set<SimplestUser>.buildPath(second: Set<SimplestUser>): List<User> =
         map { it.item.id }.intersect(second.map { it.item.id }).firstOrNull()
@@ -109,7 +110,7 @@ class HandShakesRepositoryWithTimer @Inject constructor(
         api.friendsList(user.item.id, token = prefs.token)
             .doAfterSuccess { queriesRelay.accept(Unit) }
             .observeOn(scheduler.computation())
-            .map { it.response.items }
+            .map { it.response?.items ?: listOf() }
             .flattenAsFlowable { it }
             .map {
                 SimplestUser(
