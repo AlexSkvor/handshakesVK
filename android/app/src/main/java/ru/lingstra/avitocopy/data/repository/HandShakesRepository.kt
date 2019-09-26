@@ -1,5 +1,5 @@
 package ru.lingstra.avitocopy.data.repository
-
+/*
 import io.reactivex.Observable
 import io.reactivex.Single
 import ru.lingstra.avitocopy.domain.hand_shakes.User
@@ -46,4 +46,4 @@ class HandShakesRepository @Inject constructor(
             }
         return null
     }
-}
+}*/

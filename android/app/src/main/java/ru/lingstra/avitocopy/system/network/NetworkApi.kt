@@ -28,10 +28,10 @@ interface NetworkApi {
         @Query("v") version: String = "5.101"
     ): Single<IdFromRefServerResponse>
 
-    @GET("execute")
+    /*@GET("execute")
     fun executeScript(
         @Query("code") script: String,
         @Query("access_token") token: String,
         @Query("v") version: String = "5.101"
-    ): Single<ScriptFriendsResponse>
+    ): Single<ScriptFriendsResponse>*/
 }
