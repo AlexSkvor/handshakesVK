@@ -16,7 +16,4 @@ data class FriendItem(
     val is_closed: Boolean,
     val can_access_closed: Boolean,
     val photo_100: String
-) {
-    val shouldCheck: Boolean
-        get() = can_access_closed || !is_closed
-}
+)

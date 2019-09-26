@@ -10,8 +10,8 @@ import org.junit.Test
 class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
-        val f = setOf(TT(0, "0"), TT(1, "1"))
         val s = setOf(TT(1, "111"), TT(2, "2"))
+        val f = setOf(TT(0, "0"), TT(1, "1"))
         val t: MutableSet<TT> = s.toMutableSet()
         t.addAll(f)
         println(t)

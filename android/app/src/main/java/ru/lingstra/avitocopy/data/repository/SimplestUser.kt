@@ -6,7 +6,8 @@ data class SimplestUser(
     val item: FriendItem,
     val checked: Boolean = false,
     val parent: SimplestUser? = null,
-    val level: Int = 0
+    val level: Int = 0,
+    val side: Boolean = false
 ) {
 
     val shouldCheck: Boolean

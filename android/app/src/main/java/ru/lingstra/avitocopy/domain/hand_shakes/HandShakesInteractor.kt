@@ -1,12 +1,12 @@
 package ru.lingstra.avitocopy.domain.hand_shakes
 
 import io.reactivex.Observable
-import ru.lingstra.avitocopy.data.repository.HandShakesRepository
+import ru.lingstra.avitocopy.data.repository.HandShakesRepositoryWithTimer
 import ru.lingstra.avitocopy.endWith
 import javax.inject.Inject
 
 class HandShakesInteractor @Inject constructor(
-    private val repository: HandShakesRepository
+    private val repository: HandShakesRepositoryWithTimer
 ) {
 
     fun load(input: Pair<String, String>): Observable<HandShakesPartialState> =
