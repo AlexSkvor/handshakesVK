@@ -47,6 +47,9 @@ class HandShakesPresenter @Inject constructor(
                     systemMessage.showProgress(false)
                     systemMessage.send(resourceManager.getString(R.string.errorHappened))
                 }
+                is HandShakesPartialState.Answer -> {
+                    if (it.list.isEmpty()) systemMessage.send(resourceManager.getString(R.string.nothingFound))
+                }
             }
         }.bind()
     }

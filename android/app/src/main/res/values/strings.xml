@@ -14,5 +14,6 @@
     <string name="start">Начать</string>
     <string name="timeSinceStart">Время: %d</string>
     <string name="queriesSinceStart">Запросы: %d</string>
+    <string name="nothingFound">Связи нет!!!!!</string>
 
 </resources>

@@ -16,9 +16,12 @@ import ru.lingstra.avitocopy.presentation.list.HandShakesPresenter
 import ru.lingstra.avitocopy.presentation.list.HandShakesView
 import ru.lingstra.avitocopy.ui.base.MviBaseFragment
 import ru.lingstra.avitocopy.ui.utils.delegate.CompositeDelegateAdapter
+import ru.lingstra.avitocopy.ui.utils.delegate.UserAction
 import ru.lingstra.avitocopy.visible
 import toothpick.Scope
 import toothpick.config.Module
+import android.content.Intent
+import android.net.Uri
 
 class HandShakesFragment : MviBaseFragment<HandShakesView, HandShakesPresenter>(), HandShakesView {
 
@@ -43,9 +46,13 @@ class HandShakesFragment : MviBaseFragment<HandShakesView, HandShakesPresenter>(
         renderTimeAndSearch(state)
     }
 
-    private fun renderTimeAndSearch(state: HandShakesViewState){
+    private fun onUserClicked() =
+        adapter.actions.ofType(UserAction.ItemPressed::class.java)
+            .map { it.item }.ofType(User::class.java)
+
+    private fun renderTimeAndSearch(state: HandShakesViewState) {
         timeQueriesLayout.visible = state.loaded || state.loadingInProcess
-        if (state.loaded || state.loadingInProcess){
+        if (state.loaded || state.loadingInProcess) {
             val time = state.endTime - state.startTime
             timeField.text = getString(R.string.timeSinceStart, time.toInt())
             queriesField.text = getString(R.string.queriesSinceStart, state.queries)
@@ -66,6 +73,11 @@ class HandShakesFragment : MviBaseFragment<HandShakesView, HandShakesPresenter>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecycler()
+
+        onUserClicked().subscribe {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(it.link))
+            startActivity(intent)
+        }.bind()
     }
 
     private fun setupRecycler() {

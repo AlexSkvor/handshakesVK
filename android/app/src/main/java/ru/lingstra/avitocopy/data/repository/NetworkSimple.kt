@@ -4,13 +4,14 @@ import com.jakewharton.rxrelay2.PublishRelay
 import io.reactivex.Observable
 import ru.lingstra.avitocopy.data.prefs.AppPrefs
 import ru.lingstra.avitocopy.system.network.NetworkApi
+import ru.lingstra.avitocopy.system.network.QueriesTimeController
 import timber.log.Timber
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class NetworkSimple @Inject constructor(
     private val api: NetworkApi,
-    private val prefs: AppPrefs
+    private val prefs: AppPrefs,
+    private val timeController: QueriesTimeController
 ) : NetworkProvider {
 
     private val queriesRelay: PublishRelay<Unit> = PublishRelay.create()
@@ -22,14 +23,18 @@ class NetworkSimple @Inject constructor(
     override fun getFriendItemsFromUrls(urls: Pair<String, String>): Pair<SimplestUser, SimplestUser> =
         getFriendItemFromUrl(urls.first) to getFriendItemFromUrl(urls.second)
 
-    private fun getFriendItemFromUrl(path: String): SimplestUser {
-        queriesRelay.accept(Unit)
-        return api.userInfo(userId = path.substringAfter("https://vk.com/"), token = prefs.token)
+    private fun getFriendItemFromUrl(path: String): SimplestUser =
+        timeController.nextQuery()
+            .doOnComplete { queriesRelay.accept(Unit) }
+            .andThen(
+                api.userInfo(
+                    userId = path.substringAfter("https://vk.com/"),
+                    token = prefs.token
+                )
+            )
             .map { it.response.first() }
             .map { SimplestUser(it) }
-            .delay(300L, TimeUnit.MILLISECONDS)
             .blockingGet()
-    }
 
     private fun MutableSet<SimplestUser>.loadMoreInner(level: Int): Boolean {
         val next = this.firstOrNull { it.shouldCheck && it.level == level }
@@ -42,10 +47,10 @@ class NetworkSimple @Inject constructor(
     }
 
     private fun getFriendsList(user: SimplestUser): Set<SimplestUser> {
-        queriesRelay.accept(Unit)
         return try {
-            api.friendsList(user.item.id, token = prefs.token)
-                .delay(300L, TimeUnit.MILLISECONDS)
+            timeController.nextQuery()
+                .doOnComplete { queriesRelay.accept(Unit) }
+                .andThen(api.friendsList(user.item.id, token = prefs.token))
                 .blockingGet()
                 .response.items
                 .map { SimplestUser(item = it, parent = user, level = user.level + 1) }

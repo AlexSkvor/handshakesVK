@@ -15,5 +15,5 @@ data class User(
         id = s.item.id.toString()
     )
 
-    val link = "https://vk.com/$id"
+    val link = "https://vk.com/id$id"
 }
