@@ -1,10 +1,10 @@
 package ru.lingstra.avitocopy.data.repository
 
+import android.content.res.Resources
 import com.jakewharton.rxrelay2.PublishRelay
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.functions.BiFunction
-import ru.lingstra.avitocopy.alsoPrintDebug
 import ru.lingstra.avitocopy.data.prefs.AppPrefs
 import ru.lingstra.avitocopy.domain.hand_shakes.User
 import ru.lingstra.avitocopy.system.network.NetworkApi
@@ -12,7 +12,7 @@ import ru.lingstra.avitocopy.system.schedulers.SchedulersProvider
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class HandShakesRepositoryWithTimer @Inject constructor(
+class HandShakesRepository @Inject constructor(
     private val api: NetworkApi,
     private val prefs: AppPrefs,
     private val scheduler: SchedulersProvider
@@ -57,9 +57,7 @@ class HandShakesRepositoryWithTimer @Inject constructor(
             .map { if (turn) usersSetFirst else usersSetSecond }
             .observeOn(scheduler.computation())
             .doOnNext {
-                if (loadingsNumber == 0 && it.none { u -> u.shouldCheck }) throw Exception(
-                    "not found connections"
-                )
+                if (loadingsNumber == 0 && it.none { u -> u.shouldCheck }) throw Resources.NotFoundException()
             }
             .filter { it.any { user -> user.shouldCheck } }
             .observeOn(scheduler.ui())
@@ -69,6 +67,7 @@ class HandShakesRepositoryWithTimer @Inject constructor(
             .map { it.copy(checked = true) }
             .observeOn(scheduler.ui())
             .doOnNext { replaceInSet(it) }
+            .map { if (it.level < 3) it else throw Resources.NotFoundException() }
             .observeOn(scheduler.io())
             .flatMap { getFriendsList(it) }
             .map { it.toSet() }
@@ -80,7 +79,6 @@ class HandShakesRepositoryWithTimer @Inject constructor(
             .observeOn(scheduler.ui())
             .doOnNext { loadingsNumber-- }
             .filter { it.isNotEmpty() }
-            .doOnNext { it.alsoPrintDebug("error_code") }
             .first(listOf()).toObservable()
 
     private fun buildPath(first: Set<SimplestUser>, second: Set<SimplestUser>): List<User> =
@@ -112,6 +110,7 @@ class HandShakesRepositoryWithTimer @Inject constructor(
         api.friendsList(user.item.id, token = prefs.token)
             .doAfterSuccess { queriesRelay.accept(Unit) }
             .observeOn(scheduler.computation())
+            .filter { it.response != null }
             .map { it.response?.items ?: listOf() }
             .flattenAsFlowable { it }
             .map {

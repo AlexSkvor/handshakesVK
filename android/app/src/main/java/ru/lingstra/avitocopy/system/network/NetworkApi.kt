@@ -4,7 +4,6 @@ import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
 import ru.lingstra.avitocopy.data.repository.IdFromRefServerResponse
-import ru.lingstra.avitocopy.data.repository.ScriptFriendsResponse
 import ru.lingstra.avitocopy.domain.hand_shakes.FriendsServerAnswer
 
 interface NetworkApi {
@@ -27,11 +26,4 @@ interface NetworkApi {
         @Query("fields") fields: String = "photo_100",
         @Query("v") version: String = "5.101"
     ): Single<IdFromRefServerResponse>
-
-    /*@GET("execute")
-    fun executeScript(
-        @Query("code") script: String,
-        @Query("access_token") token: String,
-        @Query("v") version: String = "5.101"
-    ): Single<ScriptFriendsResponse>*/
 }
