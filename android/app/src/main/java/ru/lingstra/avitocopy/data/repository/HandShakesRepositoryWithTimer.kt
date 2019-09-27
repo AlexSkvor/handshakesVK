@@ -4,6 +4,7 @@ import com.jakewharton.rxrelay2.PublishRelay
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.functions.BiFunction
+import ru.lingstra.avitocopy.alsoPrintDebug
 import ru.lingstra.avitocopy.data.prefs.AppPrefs
 import ru.lingstra.avitocopy.domain.hand_shakes.User
 import ru.lingstra.avitocopy.system.network.NetworkApi
@@ -49,7 +50,7 @@ class HandShakesRepositoryWithTimer @Inject constructor(
             .map { SimplestUser(it) }
 
     private fun timed() =
-        Observable.interval(700L, 350L, TimeUnit.MILLISECONDS)
+        Observable.interval(700L, 400L, TimeUnit.MILLISECONDS)
             .observeOn(scheduler.ui())
             .filter { started }
             .doOnNext { turn = !turn }
@@ -75,20 +76,21 @@ class HandShakesRepositoryWithTimer @Inject constructor(
             .doOnNext { putToSet(it) }
             .map { usersSetFirst to usersSetSecond }
             .observeOn(scheduler.computation())
-            .map { it.first.buildPath(it.second) }
+            .map { buildPath(it.first, it.second) }
             .observeOn(scheduler.ui())
             .doOnNext { loadingsNumber-- }
             .filter { it.isNotEmpty() }
+            .doOnNext { it.alsoPrintDebug("error_code") }
             .first(listOf()).toObservable()
 
-    private fun Set<SimplestUser>.buildPath(second: Set<SimplestUser>): List<User> =
-        map { it.item.id }.intersect(second.map { it.item.id }).firstOrNull()
-            ?.let { id ->
-                val answer = this.first { it.item.id == id }.toListChildStart().reversed() +
-                        second.first { it.item.id == id }.toListChildStart()
+    private fun buildPath(first: Set<SimplestUser>, second: Set<SimplestUser>): List<User> =
+        first.intersect(second).firstOrNull()
+            ?.let { commonUser ->
+                val answer =
+                    first.first { it.item.id == commonUser.item.id }.toListChildStart().reversed() +
+                            second.first { it.item.id == commonUser.item.id }.toListChildStart()
                 answer.distinct().map { User(it) }
             } ?: emptyList()
-
 
     private fun putToSet(it: Set<SimplestUser>) {
         if (it.isEmpty()) return

@@ -1,7 +1,7 @@
 package ru.lingstra.avitocopy.domain.hand_shakes
 
 data class FriendsServerAnswer(
-    val response: Response
+    val response: Response?
 )
 
 data class Response(
